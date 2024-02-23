@@ -20,7 +20,13 @@
       </div>
 <div class="product-info">
       <h1>{{ product }}</h1>
+      <p v-if="inventory > 10">In Stock</p>
+      <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
+      <p v-else>Out of Stock</p>
+      <!-- Another way of conditional showing is v-show -->
       <p>Visit <a :href="url">VueMastery.com</a> for more</p>
+
+      <p v-show="onSale">On Sale!</p>
       <p>{{ description }}</p>
     </div>
   </div>
