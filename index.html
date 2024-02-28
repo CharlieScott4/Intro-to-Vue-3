@@ -19,22 +19,32 @@
 
       </div>
 <div class="product-info">
-      <h1>{{ product }}</h1>
+      <h1>{{ title }}</h1>
       <p v-if="inventory > 10">In Stock</p>
       <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
       <p v-else>Out of Stock</p>
       <!-- Another way of conditional showing is v-show -->
-     
+       <!-- On Sale -->
       <p v-show="onSale">On Sale!</p>
+
+        <!-- description -->
       <p>{{ description }}</p>
-     <div v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)">{{ variant.color }}</div>
+        <!-- Image -->
+     <div v-for="variant in variants" :key="variant.id" 
+     @mouseover="updateImage(variant.image)" 
+     class="color-circle" :style="{backgroundColor: variant.color}"></div>
+  <!-- Size -->
      <div v-for="size in sizes">{{ size }}</div> 
+       <!-- Detail -->
      <ul>
        <li v-for="detail in details" >{{ detail }}</li>
       </ul>
-
-      <button class="button" @click="addToCart">Add to Cart</button>
+  <!-- Add/Remove Button -->
+      <button class="button" :class="{ disableButton: !inStock }"
+      :disabled="!inStock"
+       @click="addToCart">Add to Cart</button>
       <button class="button" @click="removeFromCart">Remove</button>
+        <!-- Link -->
       <p>Visit <a :href="url">VueMastery.com</a> for more</p>
 
     </div>
