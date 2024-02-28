@@ -20,19 +20,25 @@
       </div>
 <div class="product-info">
       <h1>{{ title }}</h1>
-      <p v-if="inventory > 10">In Stock</p>
-      <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
+      <p>{{ sale }}</p>
+      <!-- solution -->
+      <p v-if="inStock">In Stock</p>
       <p v-else>Out of Stock</p>
+      <ul>
       <!-- Another way of conditional showing is v-show -->
        <!-- On Sale -->
-      <p v-show="onSale">On Sale!</p>
+
 
         <!-- description -->
       <p>{{ description }}</p>
         <!-- Image -->
-     <div v-for="variant in variants" :key="variant.id" 
-     @mouseover="updateImage(variant.image)" 
-     class="color-circle" :style="{backgroundColor: variant.color}"></div>
+        <div 
+        v-for="(variant, index) in variants" 
+        :key="variant.id" 
+        @mouseover="updateVariant(index)" 
+        class="color-circle" 
+        :style="{ backgroundColor: variant.color }">
+      </div>
   <!-- Size -->
      <div v-for="size in sizes">{{ size }}</div> 
        <!-- Detail -->
