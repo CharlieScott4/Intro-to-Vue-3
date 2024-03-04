@@ -22,7 +22,6 @@ app.component('product-display', {
           
           <!-- solution -->
           <product-details :details="details"></product-details>
-          <!-- solution -->
   <!-- variant -->
           <div 
             v-for="(variant, index) in variants" 
@@ -50,7 +49,11 @@ app.component('product-display', {
 
         </div>
       </div>
-    </div>`,
+      <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+      <review-form @review-submitted="addReview"></review-form>
+      </div>`,
+
+
     data() {
       return {
           product: 'Socks',
@@ -63,6 +66,8 @@ app.component('product-display', {
           ]
       }
     },
+
+
     methods: {
         addToCart() {
             this.$emit('add-to-cart', this.variants[this.selectedVariant].id)
@@ -74,6 +79,8 @@ app.component('product-display', {
             this.selectedVariant = index
         }
     },
+
+
     computed: {
         title() {
             return this.brand + ' ' + this.product
